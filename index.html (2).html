@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darilian Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #6b6b6b;
+    --bg: #ffffff;
+    --border: #e6e6e6;
+    --accent: #1a8917;
+    --accent-hover: #156d12;
+    --surface: #f7f7f7;
+    --serif: 'Source Serif 4', 'Noto Serif SC', 'Noto Serif KR', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --max-width: 680px;
+  }
+
+  body {
+    font-family: var(--serif);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+
+  .nav-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span {
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-left: 2px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .nav-link {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--text); }
+
+  .nav-cta {
+    font-family: var(--sans);
+    font-size: 14px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--accent-hover); }
+
+  /* BLOG INDEX */
+  .blog-header {
+    max-width: var(--max-width);
+    margin: 60px auto 0;
+    padding: 0 24px;
+  }
+
+  .blog-header h1 {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.2;
+  }
+
+  .blog-header p {
+    margin-top: 12px;
+    color: var(--text-secondary);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .divider {
+    max-width: var(--max-width);
+    margin: 40px auto;
+    padding: 0 24px;
+  }
+
+  .divider hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  /* POST CARD */
+  .post-card {
+    max-width: var(--max-width);
+    margin: 0 auto 48px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .post-card:hover { opacity: 0.8; }
+
+  .post-card .meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .post-card .tag {
+    background: var(--surface);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+  }
+
+  .post-card h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .post-card .excerpt {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ARTICLE VIEW */
+  .article-container {
+    display: none;
+  }
+
+  .article-container.active {
+    display: block;
+  }
+
+  .article-back {
+    max-width: var(--max-width);
+    margin: 32px auto 0;
+    padding: 0 24px;
+  }
+
+  .article-back a {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+
+  .article-back a:hover { color: var(--text); }
+
+  article {
+    max-width: var(--max-width);
+    margin: 32px auto 80px;
+    padding: 0 24px;
+  }
+
+  article .article-meta {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    background: var(--surface);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .lang-toggle button {
+    font-family: var(--sans);
+    font-size: 13px;
+    padding: 6px 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+
+  .lang-toggle button.active {
+    background: var(--text);
+    color: white;
+  }
+
+  article h1 {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+  }
+
+  article h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+
+  article p {
+    margin-bottom: 20px;
+  }
+
+  article strong {
+    font-weight: 600;
+  }
+
+  article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(26, 137, 23, 0.3);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+  }
+
+  article a:hover {
+    text-decoration-color: var(--accent);
+  }
+
+  article .article-end {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  /* CTA BANNER */
+  .cta-banner {
+    max-width: var(--max-width);
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+
+  .cta-banner-inner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .cta-banner-inner h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .cta-banner-inner p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .cta-banner-inner a {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    background: var(--accent);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 24px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .cta-banner-inner a:hover { background: var(--accent-hover); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  footer a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--text); }
+
+  /* ANIMATION */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+
+  .fade-up-delay { animation-delay: 0.1s; opacity: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    body { font-size: 17px; }
+    .blog-header h1 { font-size: 32px; }
+    article h1 { font-size: 30px; }
+    article h2 { font-size: 21px; }
+    .nav-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://darilian.com" class="nav-logo">Darilian <span>Blog</span></a>
+    <div class="nav-right">
+      <a href="https://darilian.com" class="nav-link">Home</a>
+      <a href="https://darilian.com/#waitlist" class="nav-cta">Join Waitlist</a>
+    </div>
+  </div>
+</nav>
+
+<!-- BLOG INDEX VIEW -->
+<div id="index-view">
+  <div class="blog-header fade-up">
+    <h1>Blog</h1>
+    <p>What we're building, what we're learning, and the real challenges of remote international hiring.</p>
+  </div>
+
+  <div class="divider"><hr></div>
+
+  <div class="post-card fade-up fade-up-delay" onclick="showPost('post-1', 'en')">
+    <div class="meta">April 2026 <span class="tag">Founder Story</span></div>
+    <h2>Why We Started Darilian</h2>
+    <p class="excerpt">Our team comes from both sides of the hiring equation — engineering and HR. We've built products and we've built the teams that build them. That combination gave us a front-row seat to a problem that keeps getting worse.</p>
+    <span class="read-more">Read more →</span>
+  </div>
+
+  <div class="post-card fade-up fade-up-delay" onclick="showPost('post-1', 'zh')">
+    <div class="meta">2026年4月 <span class="tag">创始故事</span></div>
+    <h2>我们为什么创立 Darilian</h2>
+    <p class="excerpt">我们的团队横跨招聘的两端——工程与人力资源。我们既做过产品开发，也组建过开发产品的团队。这样的双重视角，让我们亲眼见证了一个日益严重的问题。</p>
+    <span class="read-more">阅读全文 →</span>
+  </div>
+
+  <div class="post-card fade-up fade-up-delay" onclick="showPost('post-1', 'ko')">
+    <div class="meta">2026년 4월 <span class="tag">창립 이야기</span></div>
+    <h2>우리가 Darilian을 시작한 이유</h2>
+    <p class="excerpt">우리 팀은 채용의 양쪽 — 엔지니어링과 인사(HR) — 에서 경험을 쌓아왔습니다. 제품을 만들어왔고, 그 제품을 만드는 팀도 구축해왔습니다. 이 두 가지 경험이 점점 심각해지는 문제를 가까이에서 보게 해주었습니다.</p>
+    <span class="read-more">더 읽기 →</span>
+  </div>
+</div>
+
+<!-- ARTICLE VIEW -->
+<div id="article-view" class="article-container">
+  <div class="article-back"><a href="#" onclick="showIndex(); return false;">← All posts</a></div>
+
+  <article>
+    <div class="article-meta">
+      <span id="article-date"></span>
+      <div class="lang-toggle">
+        <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
+        <button id="btn-zh" onclick="switchLang('zh')">中文</button>
+        <button id="btn-ko" onclick="switchLang('ko')">한국어</button>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div id="content-en">
+      <h1>Why We Started Darilian</h1>
+
+      <p>Our team comes from both sides of the hiring equation — engineering and HR. We've built products and we've built the teams that build them. That combination gave us a front-row seat to a problem that keeps getting worse.</p>
+
+      <p>In the US, certain sectors are starving for experienced talent. Not juniors — seasoned engineers with years of real-world delivery behind them. The kind of people who are genuinely hard to find, and getting harder every year.</p>
+
+      <p>In parts of Asia, those people exist. Thousands of them. Experienced, skilled, and ready to do more — but locked out of the opportunities that match their ability.</p>
+
+      <p>Our mission is to close that gap. Not with another job board or another freelance marketplace, but by creating a new way of working, building, and fundamentally changing the trajectory of how companies and talent come together across borders.</p>
+
+      <p>That's why we started Darilian.</p>
+
+      <h2>The problem up close</h2>
+
+      <p>If you're an engineer in Seoul, Taipei, or Bangalore, you know the frustration. You're talented. You've shipped real products. But when you look for opportunities at US companies, you hit a wall — visa lotteries, relocation requirements, recruiters who ghost you the moment they realize you're not in the US.</p>
+
+      <p>Meanwhile, US hiring managers are drowning. Engineering roles sit open for months. Visa sponsorship is expensive and slow. The irony is painful: companies can't find enough engineers, and engineers can't find a way in.</p>
+
+      <h2>Why existing solutions fall short</h2>
+
+      <p>Freelance marketplaces are a race to the bottom with no vetting. Traditional agencies charge enormous fees and move slowly. Employer of Record services handle payroll but don't help you find the right person. Job boards do nothing to bridge timezone, language, and cultural gaps. Nobody is solving the whole problem.</p>
+
+      <h2>What we're building</h2>
+
+      <p>Darilian is a managed staffing platform connecting Asia-Pacific engineers to US companies. Fully remote. No visa required.</p>
+
+      <p><strong>For engineers:</strong> We assess your skills, English proficiency, and async work ability. If you pass, we match you to roles — no cold applications. We handle your contract, payroll, and benefits. You keep 100% of your salary.</p>
+
+      <p><strong>For employers:</strong> You post a role, get a vetted shortlist in five days, and we handle compliance and payroll in whatever country your hire is in. 90-day replacement guarantee.</p>
+
+      <h2>Why we're being upfront</h2>
+
+      <p>We're pre-launch. We haven't proven anything yet — and we think that's worth saying out loud. We're a small team with deep roots in both engineering and talent operations, and we're going to be transparent about what works and what doesn't as we build this.</p>
+
+      <p>We're launching in 2026 across South Korea, Taiwan, India, China, Hong Kong, and Vietnam. If you're interested — <a href="https://darilian.com/#waitlist">join the waitlist</a> or reach us at <a href="mailto:hello@darilian.com">hello@darilian.com</a>. We read everything.</p>
+
+      <div class="article-end">First post on the Darilian blog. More coming on what we're building and the real challenges of remote international hiring.</div>
+    </div>
+
+    <!-- CHINESE -->
+    <div id="content-zh" style="display:none;">
+      <h1>我们为什么创立 Darilian</h1>
+
+      <p>我们的团队横跨招聘的两端——工程与人力资源。我们既做过产品开发，也组建过开发产品的团队。这样的双重视角，让我们亲眼见证了一个日益严重的问题。</p>
+
+      <p>在美国，许多行业急需资深技术人才。不是初级工程师，而是拥有多年实战交付经验的人——这类人才真的很难找到，而且一年比一年难。</p>
+
+      <p>而在亚洲，这样的人才大量存在。他们经验丰富、技术过硬、渴望更大的舞台——却被挡在与自身能力匹配的机会之外。</p>
+
+      <p>我们的使命是弥合这道鸿沟。不是再做一个招聘网站或自由职业平台，而是创造一种全新的工作方式，从根本上改变企业与人才跨越国界走到一起的轨迹。</p>
+
+      <p>这就是我们创立 Darilian 的原因。</p>
+
+      <h2>近距离看这个问题</h2>
+
+      <p>如果你是首尔、台北或班加罗尔的工程师，你一定深有体会。你有能力，你交付过真正的产品。但当你想寻找美国公司的机会时，却处处碰壁——签证抽签、必须搬迁、猎头一发现你不在美国就再无音讯。</p>
+
+      <p>与此同时，美国的招聘负责人也焦头烂额。工程岗位空缺数月无人填补，签证担保既昂贵又缓慢。讽刺的是：公司找不到足够的工程师，工程师也找不到进入的途径。双方都在输。</p>
+
+      <h2>为什么现有方案不够好</h2>
+
+      <p>自由职业平台是无底线的价格竞争，毫无筛选可言。传统猎头收费高昂、效率低下。名义雇主（EOR）服务能处理薪资合规，却不帮你找到合适的人。招聘网站对时区、语言和文化差异完全无能为力。没有人在解决整个问题。</p>
+
+      <h2>我们在做什么</h2>
+
+      <p>Darilian 是一个托管式人才配置平台，将亚太地区的工程师与美国公司连接起来。全程远程，无需签证。</p>
+
+      <p><strong>对工程师而言：</strong>我们评估你的技术能力、英语水平和异步协作能力。通过筛选后，我们为你匹配岗位——不用海投简历。合同、薪资和福利由我们全程处理。你的薪资100%归你所有。</p>
+
+      <p><strong>对雇主而言：</strong>你发布岗位，五天内收到经过审核的候选人短名单，我们负责处理候选人所在国家的合规、薪资和福利事宜。每位雇员享有90天替换保障。</p>
+
+      <h2>为什么我们选择坦诚</h2>
+
+      <p>我们还没有正式上线。我们还没有证明任何事——我们认为这一点值得坦率地说出来。我们是一支小团队，在工程和人才运营两个领域都有深厚的根基，我们会在建设过程中对哪些有效、哪些无效保持透明。</p>
+
+      <p>我们计划于2026年在韩国、台湾、印度、中国、香港和越南上线。如果你感兴趣——<a href="https://darilian.com/#waitlist">加入等候名单</a>，或通过 <a href="mailto:hello@darilian.com">hello@darilian.com</a> 联系我们。每封邮件我们都会认真阅读。</p>
+
+      <div class="article-end">这是 Darilian 博客的第一篇文章。后续我们将分享更多关于我们在做什么，以及远程国际招聘中的真实挑战。</div>
+    </div>
+
+    <!-- KOREAN -->
+    <div id="content-ko" style="display:none;">
+      <h1>우리가 Darilian을 시작한 이유</h1>
+
+      <p>우리 팀은 채용의 양쪽 — 엔지니어링과 인사(HR) — 에서 경험을 쌓아왔습니다. 제품을 만들어왔고, 그 제품을 만드는 팀도 구축해왔습니다. 이 두 가지 경험이 점점 심각해지는 문제를 가까이에서 보게 해주었습니다.</p>
+
+      <p>미국에서는 특정 분야에서 경력 있는 인재를 찾기가 매우 어렵습니다. 주니어가 아닌, 수년간의 실무 경험을 갖춘 시니어 엔지니어 — 이런 인재는 정말 구하기 힘들고, 해마다 더 어려워지고 있습니다.</p>
+
+      <p>아시아에는 그런 인재들이 있습니다. 수천 명이나 됩니다. 경험이 풍부하고, 실력이 뛰어나며, 더 큰 무대에서 일하고 싶어합니다. 하지만 자신의 역량에 맞는 기회에 접근할 수 없습니다.</p>
+
+      <p>우리의 미션은 이 격차를 해소하는 것입니다. 또 하나의 채용 사이트나 프리랜서 플랫폼을 만드는 것이 아니라, 일하고, 만들고, 국경을 넘어 기업과 인재가 만나는 방식 자체를 근본적으로 바꾸는 것입니다.</p>
+
+      <p>이것이 우리가 Darilian을 시작한 이유입니다.</p>
+
+      <h2>문제를 가까이서 보면</h2>
+
+      <p>서울, 타이베이, 방갈로르의 엔지니어라면 이 답답함을 잘 아실 겁니다. 실력이 있고, 실제 제품을 출시한 경험도 있습니다. 하지만 미국 기업의 기회를 찾으려 하면 벽에 부딪힙니다 — 비자 추첨, 이주 요건, 미국에 없다는 걸 알면 바로 연락이 끊기는 리크루터들.</p>
+
+      <p>한편 미국의 채용 담당자들도 고전하고 있습니다. 엔지니어링 포지션이 수개월째 공석입니다. 비자 스폰서십은 비용이 크고 시간도 오래 걸립니다. 아이러니한 현실입니다 — 기업은 엔지니어를 찾지 못하고, 엔지니어는 들어갈 길을 찾지 못합니다.</p>
+
+      <h2>기존 솔루션이 부족한 이유</h2>
+
+      <p>프리랜서 마켓플레이스는 검증 없이 가격 경쟁만 합니다. 전통적인 에이전시는 높은 수수료를 받으면서 느리게 움직입니다. EOR(Employer of Record) 서비스는 급여 처리를 해주지만 적합한 인재를 찾아주지는 않습니다. 채용 사이트는 시차, 언어, 문화 차이를 전혀 해결하지 못합니다. 아무도 문제 전체를 해결하고 있지 않습니다.</p>
+
+      <h2>우리가 만들고 있는 것</h2>
+
+      <p>Darilian은 아시아 태평양 지역의 엔지니어와 미국 기업을 연결하는 매니지드 스태핑 플랫폼입니다. 완전한 원격 근무. 비자 불필요.</p>
+
+      <p><strong>엔지니어:</strong> 기술 역량, 영어 능력, 비동기 협업 능력을 평가합니다. 통과하면 포지션에 매칭해 드립니다 — 무작위 지원은 없습니다. 계약, 급여, 복리후생을 모두 저희가 처리합니다. 급여의 100%를 그대로 받습니다.</p>
+
+      <p><strong>고용주:</strong> 포지션을 등록하면 5일 이내에 검증된 후보자 리스트를 받습니다. 해당 국가의 컴플라이언스, 급여, 복리후생을 저희가 처리합니다. 90일 교체 보장.</p>
+
+      <h2>우리가 솔직하게 말하는 이유</h2>
+
+      <p>아직 런칭 전입니다. 아직 증명한 것이 없습니다 — 그리고 이 점을 솔직히 말하는 것이 중요하다고 생각합니다. 엔지니어링과 인재 운영 양쪽에 깊은 뿌리를 둔 작은 팀으로서, 무엇이 되고 무엇이 안 되는지 투명하게 공유하겠습니다.</p>
+
+      <p>2026년에 한국, 대만, 인도, 중국, 홍콩, 베트남에서 런칭할 예정입니다. 관심이 있으시다면 — <a href="https://darilian.com/#waitlist">웨이트리스트에 등록</a>하시거나 <a href="mailto:hello@darilian.com">hello@darilian.com</a>으로 연락주세요. 모든 메일을 읽고 있습니다.</p>
+
+      <div class="article-end">Darilian 블로그의 첫 번째 글입니다. 앞으로 우리가 만들고 있는 것과 원격 해외 채용의 현실적인 도전에 대해 더 공유하겠습니다.</div>
+    </div>
+  </article>
+
+  <div class="cta-banner">
+    <div class="cta-banner-inner">
+      <h3 id="cta-title">Interested?</h3>
+      <p id="cta-text">Be the first to know when Darilian launches.</p>
+      <a href="https://darilian.com/#waitlist" id="cta-button">Join the Waitlist →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Darilian. All rights reserved. · <a href="mailto:hello@darilian.com">hello@darilian.com</a></p>
+</footer>
+
+<script>
+  let currentLang = 'en';
+
+  function showPost(postId, lang) {
+    document.getElementById('index-view').style.display = 'none';
+    document.getElementById('article-view').classList.add('active');
+    switchLang(lang);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showIndex() {
+    document.getElementById('index-view').style.display = 'block';
+    document.getElementById('article-view').classList.remove('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchLang(lang) {
+    currentLang = lang;
+
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('content-zh').style.display = lang === 'zh' ? 'block' : 'none';
+    document.getElementById('content-ko').style.display = lang === 'ko' ? 'block' : 'none';
+
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+
+    const dates = { en: 'April 2026', zh: '2026年4月', ko: '2026년 4월' };
+    const ctaTitles = { en: 'Interested?', zh: '感兴趣？', ko: '관심이 있으신가요?' };
+    const ctaTexts = { en: 'Be the first to know when Darilian launches.', zh: '成为第一批知道 Darilian 上线的人。', ko: 'Darilian 런칭 소식을 가장 먼저 받아보세요.' };
+    const ctaButtons = { en: 'Join the Waitlist →', zh: '加入等候名单 →', ko: '웨이트리스트 등록 →' };
+
+    document.getElementById('article-date').textContent = dates[lang];
+    document.getElementById('cta-title').textContent = ctaTitles[lang];
+    document.getElementById('cta-text').textContent = ctaTexts[lang];
+    document.getElementById('cta-button').textContent = ctaButtons[lang];
+  }
+</script>
+
+</body>
+</html>
