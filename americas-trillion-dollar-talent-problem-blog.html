@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>America's $1 Trillion Problem — Darilian</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --paper: #fafaf7;
+    --accent: #2d6a4f;
+    --accent-light: #e9f5ef;
+    --muted: #6b7280;
+    --border: #e5e5e0;
+    --highlight: #d4a843;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.72;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* — Top bar — */
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .topbar .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* — Hero — */
+  .hero {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 80px 24px 48px;
+  }
+  .hero .tags {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hero .subtitle {
+    font-size: 20px;
+    color: var(--muted);
+    line-height: 1.55;
+    max-width: 640px;
+  }
+  .hero .meta {
+    margin-top: 28px;
+    font-size: 14px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  /* — Stats strip — */
+  .stats {
+    max-width: 780px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--paper);
+    padding: 24px 16px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* — Article body — */
+  article {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  article h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 56px 0 16px;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  article p {
+    margin-bottom: 18px;
+  }
+
+  /* — Blockquote — */
+  article blockquote {
+    border-left: 3px solid var(--highlight);
+    margin: 32px 0;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #fdf8eb 0%, #faf6f0 100%);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: #4a4a4a;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  blockquote cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* — Case study box — */
+  .case-study {
+    background: var(--ink);
+    color: #e0e0e0;
+    padding: 32px;
+    border-radius: 6px;
+    margin: 36px 0;
+    line-height: 1.7;
+  }
+  .case-study .cs-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--highlight);
+    margin-bottom: 12px;
+  }
+  .case-study p { color: #d0d0d0; margin-bottom: 14px; }
+  .case-study p:last-child { margin-bottom: 0; }
+
+  /* — CTA — */
+  .cta {
+    max-width: 780px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+  .cta-inner {
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    background: var(--accent-light);
+  }
+  .cta-inner h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .cta-inner p {
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-inner a {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: background 0.2s;
+  }
+  .cta-inner a:hover { background: #235a40; }
+
+  /* — Footer — */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .hero { padding-top: 48px; }
+    article h2 { font-size: 24px; }
+    .case-study { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="logo">Darilian</span>
+  <span>Research · April 2026</span>
+</div>
+
+<header class="hero">
+  <div class="tags">Talent Acquisition · Semiconductor · Battery &amp; EV · Asia-Pacific</div>
+  <h1>America's $1&nbsp;Trillion Problem: The Engineering Talent It Needs Is in Asia-Pacific</h1>
+  <p class="subtitle">The U.S. is spending hundreds of billions to reshore critical industries. But money can build factories—it can't conjure experienced engineers overnight.</p>
+  <div class="meta">Darilian Research · April 2026 · 5 min read</div>
+</header>
+
+<div class="stats">
+  <div class="stat"><span class="num">67K</span><span class="label">Semiconductor worker shortfall by 2030</span></div>
+  <div class="stat"><span class="num">1M+</span><span class="label">Additional semiconductor workers needed globally</span></div>
+  <div class="stat"><span class="num">82%</span><span class="label">Battery employers reporting skilled-labor shortages</span></div>
+  <div class="stat"><span class="num">200K</span><span class="label">New U.S. battery jobs expected by 2030</span></div>
+</div>
+
+<article>
+
+  <p>The federal government has committed over a trillion dollars to rebuild domestic semiconductor manufacturing, battery production, and advanced infrastructure. New fabs are rising in Arizona and Ohio; gigafactories are breaking ground across the Southeast. Yet the single greatest threat to all of it isn't funding or supply chains—it's people.</p>
+
+  <p>The U.S. faces a structural engineering talent shortage already reshaping industries deemed critical to national security. Semiconductors, batteries, energy storage, and advanced manufacturing all share the same bottleneck: there simply aren't enough qualified engineers to staff the facilities that billions of dollars are building.</p>
+
+  <p>The engineers who could fill these roles exist in large numbers—in South Korea, Taiwan, Japan, and India. Many are world-class experts in exactly the fields where American industry is most desperate. But they can't get in.</p>
+
+  <h2>The Semiconductor Crunch</h2>
+
+  <p>The CHIPS and Science Act allocated $52 billion to revitalize domestic chip production. TSMC, Intel, and Samsung have announced major U.S. expansions—but every announcement runs into the same wall: workforce. TSMC delayed mass production at its Arizona fab due to a shortage of skilled labor, ultimately flying in hundreds of technicians from Taiwan as a temporary fix.</p>
+
+  <p>The domestic pipeline has been shrinking for decades. The U.S. semiconductor workforce stands at roughly 345,000 and needs to reach 460,000 by decade's end. A third of the industry's most experienced engineers are approaching retirement. And 50–60% of students earning advanced semiconductor degrees at U.S. universities are foreign-born—most of whom leave after graduation.</p>
+
+  <blockquote>The domestic pipeline is broken in both directions: not enough Americans are entering the field, and the international students who do train here are leaving.</blockquote>
+
+  <p>Meanwhile, South Korea and Taiwan have deep benches of process engineers, lithography specialists, and yield-improvement experts developed over decades of sustained investment. These are mid-career and senior professionals with highly specialized knowledge that takes years to develop.</p>
+
+  <h2>Batteries: Northvolt's Warning</h2>
+
+  <p>If semiconductors offer a slow-motion case study, the battery industry provides a sharper one. Northvolt—Europe's most ambitious domestic battery play—raised over $13 billion with backing from Volkswagen and Goldman Sachs. It still failed.</p>
+
+  <div class="case-study">
+    <div class="cs-label">Case Study: Northvolt</div>
+    <p>Northvolt's production equipment was largely sourced from China and South Korea. Operating it required engineers with deep lithium-ion manufacturing experience—expertise concentrated almost entirely in East Asia. Europe couldn't provide those skills, and importing talent proved insurmountable. A BCG managing director called it "a classic example of a great idea that falls over on the availability of labor."</p>
+    <p>After bankruptcy, Northvolt's battery researchers reportedly sought to return to Korean companies like LG Energy Solution, Samsung SDI, and SK On. The expertise didn't disappear—it went back to where it came from.</p>
+  </div>
+
+  <p>The U.S. battery sector faces similar dynamics. 82% of employers across the battery supply chain report shortages of skilled local applicants, concentrated in electrochemistry, battery management systems, and manufacturing engineering. Michigan's $5 million pilot program to train battery technicians attracted just 220 enrollees against a goal of 2,000.</p>
+
+  <h2>The Visa Wall</h2>
+
+  <p>The talent exists. South Korea produces thousands of engineers annually with direct semiconductor and battery manufacturing experience. Taiwan's workforce is among the world's most skilled. India graduates vast numbers with advanced degrees from top institutions.</p>
+
+  <p>But the H-1B visa program caps annual visas at 85,000—while the semiconductor industry alone faces a shortfall several times that number. A new $100,000 fee on each successful H-1B petition, effective since September 2025, has caused filings to drop sharply. Goldman Sachs filings dropped over 60%. For smaller firms, an engineer costing $150,000 in salary now carries an additional $100,000 in visa costs before day one.</p>
+
+  <p>Processing backlogs push H-1B stamping appointments at U.S. consulates in India into 2027. HR teams budget for 18-to-24-month lead times for a single hire. For an industry needing tens of thousands of engineers in the next five years, these timelines are functionally unusable.</p>
+
+  <blockquote>Given the demographic reality, immigration is the most viable solution to the shortage of workers, both in the short term and in the long run.<cite>— Zeke Hernandez, Wharton School of Business</cite></blockquote>
+
+  <h2>What Needs to Change</h2>
+
+  <p>The path forward requires action on three fronts simultaneously. <strong>Visa reform</strong> must account for strategic workforce needs—critical industries need dedicated, expedited pathways for experienced international talent. <strong>The domestic pipeline</strong> must be rebuilt through sustained investment in engineering programs and apprenticeship models, though even optimistically this takes a decade. <strong>New sourcing infrastructure</strong> must connect U.S. companies with experienced Asia-Pacific engineers in ways that go beyond keyword matching—bridging language, culture, and professional norms to make cross-border hiring practical.</p>
+
+  <p>The trillion-dollar investments are real. The factories are being built. But none of it works without people—and the people who could make it work are on the other side of a wall that was never designed to keep them out.</p>
+
+</article>
+
+<div class="cta">
+  <div class="cta-inner">
+    <h3>Darilian connects Asia-Pacific engineering talent with U.S. companies building the future.</h3>
+    <p>Hiring in semiconductors, batteries, energy, or advanced manufacturing? Or an Asia-Pacific engineer looking for your next opportunity?</p>
+    <a href="https://darilian.com">Learn more at darilian.com</a>
+  </div>
+</div>
+
+<footer>© 2026 Darilian. All rights reserved.</footer>
+
+</body>
+</html>
