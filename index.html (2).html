@@ -6,7 +6,7 @@
 <title>Darilian Blog</title>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="f9b3e8e8-de3c-429c-805e-f35177e43ec9"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+KR:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,6 +20,7 @@
     --surface: #f7f7f7;
     --serif: 'Source Serif 4', 'Noto Serif SC', 'Noto Serif KR', Georgia, serif;
     --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
     --max-width: 680px;
   }
 
@@ -298,6 +299,91 @@
     color: var(--text-secondary);
   }
 
+  /* STATS STRIP (post-2) */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 32px 0;
+  }
+
+  .stat-item {
+    background: var(--bg);
+    padding: 20px 12px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.3;
+  }
+
+  /* BLOCKQUOTE (post-2) */
+  article blockquote {
+    border-left: 3px solid #d4a843;
+    margin: 28px 0;
+    padding: 16px 20px;
+    background: #fdfaf3;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #4a4a4a;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  blockquote cite {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* CASE STUDY BOX (post-2) */
+  .case-study-box {
+    background: var(--text);
+    color: #e0e0e0;
+    padding: 28px;
+    border-radius: 8px;
+    margin: 28px 0;
+    line-height: 1.7;
+  }
+
+  .case-study-box .cs-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #d4a843;
+    margin-bottom: 12px;
+  }
+
+  .case-study-box p {
+    color: #d0d0d0;
+    margin-bottom: 12px;
+  }
+
+  .case-study-box p:last-child {
+    margin-bottom: 0;
+  }
+
   /* CTA BANNER */
   .cta-banner {
     max-width: var(--max-width);
@@ -377,6 +463,7 @@
     article h1 { font-size: 30px; }
     article h2 { font-size: 21px; }
     .nav-link { display: none; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
@@ -401,6 +488,25 @@
 
   <div class="divider"><hr></div>
 
+  <!-- POST 2: Talent Shortage (EN) -->
+  <div class="post-card fade-up fade-up-delay" onclick="showPost('post-2', 'en')">
+    <div class="meta">April 2026 <span class="tag">Research</span></div>
+    <h2>America's $1 Trillion Problem: The Engineering Talent It Needs Is in Asia-Pacific</h2>
+    <p class="excerpt">The U.S. is spending hundreds of billions to reshore critical industries. But money can build factories — it can't conjure experienced engineers overnight. The talent exists. It's just on the other side of a visa wall.</p>
+    <span class="read-more">Read more →</span>
+  </div>
+
+  <!-- POST 2: Talent Shortage (KO) -->
+  <div class="post-card fade-up fade-up-delay" onclick="showPost('post-2', 'ko')">
+    <div class="meta">2026년 4월 <span class="tag">리서치</span></div>
+    <h2>미국의 1조 달러 문제: 필요한 엔지니어링 인재는 아시아태평양에 있다</h2>
+    <p class="excerpt">미국은 핵심 산업의 리쇼어링에 수천억 달러를 투자하고 있습니다. 하지만 돈으로 공장은 지을 수 있어도, 숙련된 엔지니어를 하루아침에 만들 수는 없습니다.</p>
+    <span class="read-more">더 읽기 →</span>
+  </div>
+
+  <div class="divider"><hr></div>
+
+  <!-- POST 1: Why We Started (EN) -->
   <div class="post-card fade-up fade-up-delay" onclick="showPost('post-1', 'en')">
     <div class="meta">April 2026 <span class="tag">Founder Story</span></div>
     <h2>Why We Started Darilian</h2>
@@ -423,22 +529,165 @@
   </div>
 </div>
 
-<!-- ARTICLE VIEW -->
-<div id="article-view" class="article-container">
+<!-- ============================================================ -->
+<!-- ARTICLE VIEW: POST 2 — Talent Shortage -->
+<!-- ============================================================ -->
+<div id="article-view-post-2" class="article-container">
   <div class="article-back"><a href="#" onclick="showIndex(); return false;">← All posts</a></div>
 
   <article>
     <div class="article-meta">
-      <span id="article-date"></span>
+      <span id="article-date-post-2">April 2026</span>
       <div class="lang-toggle">
-        <button id="btn-en" class="active" onclick="switchLang('en')">EN</button>
-        <button id="btn-zh" onclick="switchLang('zh')">中文</button>
-        <button id="btn-ko" onclick="switchLang('ko')">한국어</button>
+        <button id="btn-en-post-2" class="active" onclick="switchLang('en', 'post-2')">EN</button>
+        <button id="btn-ko-post-2" onclick="switchLang('ko', 'post-2')">한국어</button>
       </div>
     </div>
 
     <!-- ENGLISH -->
-    <div id="content-en">
+    <div id="content-en-post-2">
+      <h1>America's $1 Trillion Problem: The Engineering Talent It Needs Is in Asia-Pacific</h1>
+
+      <p>The federal government has committed over a trillion dollars to rebuild domestic semiconductor manufacturing, battery production, and advanced infrastructure. New fabs are rising in Arizona and Ohio; gigafactories are breaking ground across the Southeast. Yet the single greatest threat to all of it isn't funding or supply chains — it's people.</p>
+
+      <div class="stats-strip">
+        <div class="stat-item"><span class="stat-num">67K</span><span class="stat-label">Semiconductor worker shortfall by 2030</span></div>
+        <div class="stat-item"><span class="stat-num">1M+</span><span class="stat-label">Additional semiconductor workers needed globally</span></div>
+        <div class="stat-item"><span class="stat-num">82%</span><span class="stat-label">Battery employers reporting skilled-labor shortages</span></div>
+        <div class="stat-item"><span class="stat-num">200K</span><span class="stat-label">New U.S. battery jobs expected by 2030</span></div>
+      </div>
+
+      <p>The U.S. faces a structural engineering talent shortage already reshaping industries deemed critical to national security. Semiconductors, batteries, energy storage, and advanced manufacturing all share the same bottleneck: there simply aren't enough qualified engineers to staff the facilities that billions of dollars are building.</p>
+
+      <p>The engineers who could fill these roles exist in large numbers — in South Korea, Taiwan, Japan, and India. Many are world-class experts in exactly the fields where American industry is most desperate. But they can't get in.</p>
+
+      <h2>The Semiconductor Crunch</h2>
+
+      <p>The CHIPS and Science Act allocated $52 billion to revitalize domestic chip production. TSMC, Intel, and Samsung have announced major U.S. expansions — but every announcement runs into the same wall: workforce. TSMC delayed mass production at its Arizona fab due to a shortage of skilled labor, ultimately flying in hundreds of technicians from Taiwan as a temporary fix.</p>
+
+      <p>The domestic pipeline has been shrinking for decades. The U.S. semiconductor workforce stands at roughly 345,000 and needs to reach 460,000 by decade's end. A third of the industry's most experienced engineers are approaching retirement. And 50–60% of students earning advanced semiconductor degrees at U.S. universities are foreign-born — most of whom leave after graduation.</p>
+
+      <blockquote>The domestic pipeline is broken in both directions: not enough Americans are entering the field, and the international students who do train here are leaving.</blockquote>
+
+      <p>Meanwhile, South Korea and Taiwan have deep benches of process engineers, lithography specialists, and yield-improvement experts developed over decades of sustained investment. These are mid-career and senior professionals with highly specialized knowledge that takes years to develop.</p>
+
+      <h2>Batteries: Northvolt's Warning</h2>
+
+      <p>If semiconductors offer a slow-motion case study, the battery industry provides a sharper one. Northvolt — Europe's most ambitious domestic battery play — raised over $13 billion with backing from Volkswagen and Goldman Sachs. It still failed.</p>
+
+      <div class="case-study-box">
+        <div class="cs-label">Case Study: Northvolt</div>
+        <p>Northvolt's production equipment was largely sourced from China and South Korea. Operating it required engineers with deep lithium-ion manufacturing experience — expertise concentrated almost entirely in East Asia. Europe couldn't provide those skills, and importing talent proved insurmountable. A BCG managing director called it "a classic example of a great idea that falls over on the availability of labor."</p>
+        <p>After bankruptcy, Northvolt's battery researchers reportedly sought to return to Korean companies like LG Energy Solution, Samsung SDI, and SK On. The expertise didn't disappear — it went back to where it came from.</p>
+      </div>
+
+      <p>The U.S. battery sector faces similar dynamics. 82% of employers across the battery supply chain report shortages of skilled local applicants, concentrated in electrochemistry, battery management systems, and manufacturing engineering. Michigan's $5 million pilot program to train battery technicians attracted just 220 enrollees against a goal of 2,000.</p>
+
+      <h2>The Visa Wall</h2>
+
+      <p>The talent exists. South Korea produces thousands of engineers annually with direct semiconductor and battery manufacturing experience. Taiwan's workforce is among the world's most skilled. India graduates vast numbers with advanced degrees from top institutions.</p>
+
+      <p>But the H-1B visa program caps annual visas at 85,000 — while the semiconductor industry alone faces a shortfall several times that number. A new $100,000 fee on each successful H-1B petition, effective since September 2025, has caused filings to drop sharply. Goldman Sachs filings dropped over 60%. For smaller firms, an engineer costing $150,000 in salary now carries an additional $100,000 in visa costs before day one.</p>
+
+      <p>Processing backlogs push H-1B stamping appointments at U.S. consulates in India into 2027. HR teams budget for 18-to-24-month lead times for a single hire. For an industry needing tens of thousands of engineers in the next five years, these timelines are functionally unusable.</p>
+
+      <blockquote>Given the demographic reality, immigration is the most viable solution to the shortage of workers, both in the short term and in the long run.<cite>— Zeke Hernandez, Wharton School of Business</cite></blockquote>
+
+      <h2>What Needs to Change</h2>
+
+      <p>The path forward requires action on three fronts simultaneously. <strong>Visa reform</strong> must account for strategic workforce needs — critical industries need dedicated, expedited pathways for experienced international talent. <strong>The domestic pipeline</strong> must be rebuilt through sustained investment in engineering programs and apprenticeship models, though even optimistically this takes a decade. <strong>New sourcing infrastructure</strong> must connect U.S. companies with experienced Asia-Pacific engineers in ways that go beyond keyword matching — bridging language, culture, and professional norms to make cross-border hiring practical.</p>
+
+      <p>The trillion-dollar investments are real. The factories are being built. But none of it works without people — and the people who could make it work are on the other side of a wall that was never designed to keep them out.</p>
+
+      <div class="article-end">Darilian connects Asia-Pacific engineering talent with U.S. companies building the future. If you're hiring in semiconductors, batteries, energy, or advanced manufacturing — or if you're an engineer looking for your next opportunity — <a href="https://darilian.com">we'd like to talk</a>.</div>
+    </div>
+
+    <!-- KOREAN -->
+    <div id="content-ko-post-2" style="display:none;">
+      <h1>미국의 1조 달러 문제: 필요한 엔지니어링 인재는 아시아태평양에 있다</h1>
+
+      <p>미국 연방정부는 반도체 제조, 배터리 생산, 첨단 인프라 재건에 1조 달러 이상을 투입하고 있습니다. 애리조나와 오하이오에 새로운 팹이 들어서고, 남동부 전역에서 기가팩토리가 착공되고 있습니다. 그러나 이 모든 것을 위협하는 가장 큰 요소는 자금이나 공급망이 아닌 — 사람입니다.</p>
+
+      <div class="stats-strip">
+        <div class="stat-item"><span class="stat-num">67K</span><span class="stat-label">2030년까지 반도체 인력 부족 전망</span></div>
+        <div class="stat-item"><span class="stat-num">1M+</span><span class="stat-label">글로벌 반도체 추가 인력 필요</span></div>
+        <div class="stat-item"><span class="stat-num">82%</span><span class="stat-label">숙련 인력 부족을 보고한 배터리 기업</span></div>
+        <div class="stat-item"><span class="stat-num">200K</span><span class="stat-label">2030년까지 미국 내 신규 배터리 일자리</span></div>
+      </div>
+
+      <p>미국은 국가 안보의 핵심 산업에서 구조적인 엔지니어링 인재 부족에 직면해 있습니다. 반도체, 배터리, 에너지 저장, 첨단 제조 — 모두 같은 병목에 걸려 있습니다. 수십억 달러를 들여 짓는 시설에 배치할 엔지니어가 충분하지 않습니다.</p>
+
+      <p>이 역할을 채울 수 있는 엔지니어들은 한국, 대만, 일본, 인도에 다수 존재합니다. 많은 이들이 미국 산업이 가장 절실히 필요로 하는 분야의 세계적 전문가입니다. 하지만 그들은 들어올 수 없습니다.</p>
+
+      <h2>반도체 위기</h2>
+
+      <p>CHIPS 및 과학법은 국내 칩 생산 재건에 520억 달러를 배정했습니다. TSMC, 인텔, 삼성은 미국 내 대규모 확장을 발표했지만 — 매번 같은 벽에 부딪힙니다: 인력. TSMC는 숙련 노동력 부족으로 애리조나 팹의 양산을 연기했고, 임시 해결책으로 대만에서 수백 명의 기술자를 파견했습니다.</p>
+
+      <p>미국의 국내 인력 파이프라인은 수십 년간 축소되어 왔습니다. 현재 반도체 인력은 약 34만 5천 명이며, 2030년까지 46만 명이 필요합니다. 업계에서 가장 경험 많은 엔지니어의 3분의 1이 퇴직을 앞두고 있습니다. 미국 대학에서 반도체 관련 고급 학위를 취득하는 학생의 50~60%가 외국 출신이며, 대부분 졸업 후 미국을 떠납니다.</p>
+
+      <blockquote>국내 파이프라인은 양방향으로 붕괴되었습니다: 충분한 미국인이 이 분야에 진입하지 않고, 이곳에서 훈련받은 유학생들은 떠나고 있습니다.</blockquote>
+
+      <p>반면, 한국과 대만은 수십 년간의 지속적인 투자를 통해 공정 엔지니어, 리소그래피 전문가, 수율 개선 전문가들의 깊은 인재풀을 구축해 왔습니다. 이들은 중견 및 시니어 전문가로, 수년간 쌓은 고도로 전문화된 지식을 보유하고 있습니다.</p>
+
+      <h2>배터리: 노스볼트의 경고</h2>
+
+      <p>반도체가 서서히 진행되는 사례 연구라면, 배터리 산업은 더 날카로운 교훈을 줍니다. 유럽 최대의 배터리 육성 프로젝트 노스볼트는 폭스바겐과 골드만삭스의 지원을 받아 130억 달러 이상을 조달했지만, 결국 실패했습니다.</p>
+
+      <div class="case-study-box">
+        <div class="cs-label">사례 연구: 노스볼트</div>
+        <p>노스볼트의 생산 장비는 대부분 중국과 한국에서 조달되었습니다. 이를 운영하려면 리튬이온 배터리 제조에 깊은 경험을 가진 엔지니어가 필요했지만, 이러한 전문성은 거의 전적으로 동아시아에 집중되어 있었습니다. BCG 매니징 디렉터는 이를 "훌륭한 아이디어지만 인력 확보에서 무너진 전형적인 사례"라고 평가했습니다.</p>
+        <p>파산 후, 노스볼트의 배터리 연구원들은 LG에너지솔루션, 삼성SDI, SK온 등 한국 기업으로 복귀를 모색한 것으로 알려졌습니다. 전문성은 사라지지 않았습니다 — 원래 있던 곳으로 돌아갔을 뿐입니다.</p>
+      </div>
+
+      <p>미국 배터리 산업도 유사한 상황에 직면해 있습니다. 배터리 공급망 전반의 고용주 82%가 숙련된 현지 지원자 부족을 보고하고 있으며, 전기화학, 배터리 관리 시스템, 제조 엔지니어링에 집중되어 있습니다. 미시간주의 500만 달러 배터리 기술자 훈련 시범 프로그램은 2,000명 목표 대비 220명만 등록했습니다.</p>
+
+      <h2>비자 장벽</h2>
+
+      <p>인재는 존재합니다. 한국만 해도 매년 반도체 및 배터리 제조 직접 경험을 가진 수천 명의 엔지니어를 배출합니다. 대만의 인력은 세계 최고 수준이며, 인도는 최고 교육기관에서 고급 학위를 가진 방대한 수의 엔지니어를 배출합니다.</p>
+
+      <p>그러나 H-1B 비자 프로그램은 연간 비자를 85,000개로 제한하고 있으며, 반도체 산업만의 인력 부족은 그 몇 배에 달합니다. 2025년 9월부터 시행된 H-1B 청원 건당 10만 달러의 새로운 수수료로 신청이 급감했습니다. 골드만삭스의 신청은 60% 이상 감소했습니다. 중소기업의 경우, 연봉 15만 달러의 엔지니어에게 첫날부터 추가로 10만 달러의 비자 비용이 발생합니다.</p>
+
+      <p>처리 적체로 인도 미국 영사관의 H-1B 스탬핑 예약이 2027년까지 밀려 있습니다. 인사팀은 한 명을 채용하는 데 18~24개월의 리드타임을 예산에 반영하고 있습니다. 향후 5년간 수만 명의 엔지니어가 필요한 산업에서 이 일정은 사실상 사용 불가능합니다.</p>
+
+      <blockquote>인구학적 현실을 고려하면, 이민은 단기적으로나 장기적으로나 인력 부족에 대한 가장 실현 가능한 해결책입니다.<cite>— 지크 에르난데스, 와튼 경영대학원</cite></blockquote>
+
+      <h2>무엇이 바뀌어야 하는가</h2>
+
+      <p>앞으로 나아가려면 세 가지 전선에서 동시에 행동해야 합니다. <strong>비자 개혁</strong>은 전략적 인력 수요를 반영해야 하며, 핵심 산업에는 경험 있는 국제 인재를 위한 전용 신속 경로가 필요합니다. <strong>국내 파이프라인</strong>은 공학 프로그램과 도제 모델에 대한 지속적인 투자를 통해 재건되어야 하지만, 낙관적으로 봐도 10년이 걸립니다. <strong>새로운 소싱 인프라</strong>는 키워드 매칭을 넘어 언어, 문화, 전문적 규범을 연결하여 국경을 초월한 채용을 실용적으로 만들어야 합니다.</p>
+
+      <p>1조 달러 투자는 현실입니다. 공장은 지어지고 있습니다. 하지만 사람 없이는 아무것도 작동하지 않습니다 — 그리고 이를 가능하게 할 사람들은 애초에 그들을 막으려 설계된 적 없는 벽 너머에 있습니다.</p>
+
+      <div class="article-end">Darilian은 아시아태평양 엔지니어링 인재와 미래를 만드는 미국 기업을 연결합니다. 반도체, 배터리, 에너지, 첨단 제조 분야에서 채용 중이거나 — 다음 기회를 찾는 엔지니어라면 — <a href="https://darilian.com">이야기를 나누고 싶습니다</a>.</div>
+    </div>
+  </article>
+
+  <div class="cta-banner">
+    <div class="cta-banner-inner">
+      <h3 id="cta-title-post-2">Interested?</h3>
+      <p id="cta-text-post-2">Be the first to know when Darilian launches.</p>
+      <a href="https://darilian.com/#waitlist" id="cta-button-post-2">Join the Waitlist →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ARTICLE VIEW: POST 1 — Why We Started -->
+<!-- ============================================================ -->
+<div id="article-view-post-1" class="article-container">
+  <div class="article-back"><a href="#" onclick="showIndex(); return false;">← All posts</a></div>
+
+  <article>
+    <div class="article-meta">
+      <span id="article-date-post-1"></span>
+      <div class="lang-toggle">
+        <button id="btn-en-post-1" class="active" onclick="switchLang('en', 'post-1')">EN</button>
+        <button id="btn-zh-post-1" onclick="switchLang('zh', 'post-1')">中文</button>
+        <button id="btn-ko-post-1" onclick="switchLang('ko', 'post-1')">한국어</button>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div id="content-en-post-1">
       <h1>Why We Started Darilian</h1>
 
       <p>Our team comes from both sides of the hiring equation — engineering and HR. We've built products and we've built the teams that build them. That combination gave us a front-row seat to a problem that keeps getting worse.</p>
@@ -479,7 +728,7 @@
     </div>
 
     <!-- CHINESE -->
-    <div id="content-zh" style="display:none;">
+    <div id="content-zh-post-1" style="display:none;">
       <h1>我们为什么创立 Darilian</h1>
 
       <p>我们的团队横跨招聘的两端——工程与人力资源。我们既做过产品开发，也组建过开发产品的团队。这样的双重视角，让我们亲眼见证了一个日益严重的问题。</p>
@@ -520,7 +769,7 @@
     </div>
 
     <!-- KOREAN -->
-    <div id="content-ko" style="display:none;">
+    <div id="content-ko-post-1" style="display:none;">
       <h1>우리가 Darilian을 시작한 이유</h1>
 
       <p>우리 팀은 채용의 양쪽 — 엔지니어링과 인사(HR) — 에서 경험을 쌓아왔습니다. 제품을 만들어왔고, 그 제품을 만드는 팀도 구축해왔습니다. 이 두 가지 경험이 점점 심각해지는 문제를 가까이에서 보게 해주었습니다.</p>
@@ -563,9 +812,9 @@
 
   <div class="cta-banner">
     <div class="cta-banner-inner">
-      <h3 id="cta-title">Interested?</h3>
-      <p id="cta-text">Be the first to know when Darilian launches.</p>
-      <a href="https://darilian.com/#waitlist" id="cta-button">Join the Waitlist →</a>
+      <h3 id="cta-title-post-1">Interested?</h3>
+      <p id="cta-text-post-1">Be the first to know when Darilian launches.</p>
+      <a href="https://darilian.com/#waitlist" id="cta-button-post-1">Join the Waitlist →</a>
     </div>
   </div>
 </div>
@@ -575,41 +824,65 @@
 </footer>
 
 <script>
-  let currentLang = 'en';
+  let currentPost = null;
 
   function showPost(postId, lang) {
     document.getElementById('index-view').style.display = 'none';
-    document.getElementById('article-view').classList.add('active');
-    switchLang(lang);
+    // Hide all article views
+    document.querySelectorAll('.article-container').forEach(el => el.classList.remove('active'));
+    // Show the correct one
+    document.getElementById('article-view-' + postId).classList.add('active');
+    currentPost = postId;
+    switchLang(lang, postId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function showIndex() {
     document.getElementById('index-view').style.display = 'block';
-    document.getElementById('article-view').classList.remove('active');
+    document.querySelectorAll('.article-container').forEach(el => el.classList.remove('active'));
+    currentPost = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function switchLang(lang) {
-    currentLang = lang;
+  function switchLang(lang, postId) {
+    if (!postId) postId = currentPost;
+    if (!postId) return;
 
-    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
-    document.getElementById('content-zh').style.display = lang === 'zh' ? 'block' : 'none';
-    document.getElementById('content-ko').style.display = lang === 'ko' ? 'block' : 'none';
+    // Get all lang buttons and content divs for this post
+    var suffix = '-' + postId;
 
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
-    document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+    // Determine available languages for this post
+    var langs;
+    if (postId === 'post-2') {
+      langs = ['en', 'ko'];
+    } else {
+      langs = ['en', 'zh', 'ko'];
+    }
 
-    const dates = { en: 'April 2026', zh: '2026年4月', ko: '2026년 4월' };
-    const ctaTitles = { en: 'Interested?', zh: '感兴趣？', ko: '관심이 있으신가요?' };
-    const ctaTexts = { en: 'Be the first to know when Darilian launches.', zh: '成为第一批知道 Darilian 上线的人。', ko: 'Darilian 런칭 소식을 가장 먼저 받아보세요.' };
-    const ctaButtons = { en: 'Join the Waitlist →', zh: '加入等候名单 →', ko: '웨이트리스트 등록 →' };
+    // Toggle content visibility
+    langs.forEach(function(l) {
+      var content = document.getElementById('content-' + l + suffix);
+      var btn = document.getElementById('btn-' + l + suffix);
+      if (content) content.style.display = l === lang ? 'block' : 'none';
+      if (btn) btn.classList.toggle('active', l === lang);
+    });
 
-    document.getElementById('article-date').textContent = dates[lang];
-    document.getElementById('cta-title').textContent = ctaTitles[lang];
-    document.getElementById('cta-text').textContent = ctaTexts[lang];
-    document.getElementById('cta-button').textContent = ctaButtons[lang];
+    // Update dates
+    var dates = { en: 'April 2026', zh: '2026年4月', ko: '2026년 4월' };
+    var dateEl = document.getElementById('article-date' + suffix);
+    if (dateEl) dateEl.textContent = dates[lang];
+
+    // Update CTA
+    var ctaTitles = { en: 'Interested?', zh: '感兴趣？', ko: '관심이 있으신가요?' };
+    var ctaTexts = { en: 'Be the first to know when Darilian launches.', zh: '成为第一批知道 Darilian 上线的人。', ko: 'Darilian 런칭 소식을 가장 먼저 받아보세요.' };
+    var ctaButtons = { en: 'Join the Waitlist →', zh: '加入等候名单 →', ko: '웨이트리스트 등록 →' };
+
+    var ctaTitle = document.getElementById('cta-title' + suffix);
+    var ctaText = document.getElementById('cta-text' + suffix);
+    var ctaButton = document.getElementById('cta-button' + suffix);
+    if (ctaTitle) ctaTitle.textContent = ctaTitles[lang];
+    if (ctaText) ctaText.textContent = ctaTexts[lang];
+    if (ctaButton) ctaButton.textContent = ctaButtons[lang];
   }
 </script>
 
